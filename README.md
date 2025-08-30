@@ -87,7 +87,7 @@ To visualize the dynamics of the system, it is suggested to use external softwar
  <a id="Disclaimer"></a>
 # Disclaimer
 
-Note that the presented code is **not** an ongoing software project with active support. Instead, it is part of the appendix of [1] and reflects the state of the software used to obtain the corresponding numerical results. For any questions regarding [1] and the corresponding data, please contact the corresponding authors.
+Note that the presented code is *not* an ongoing software project with active support. Instead, it is part of the appendix of [1] and reflects the state of the software used to obtain the corresponding numerical results. For any questions regarding [1] and the corresponding data, please contact the corresponding authors.
 
  <a id="Cite"></a>
 # Cite this software

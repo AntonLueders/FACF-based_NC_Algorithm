@@ -23,6 +23,7 @@
 #define DT 0.00001
 #define RV 1.55
 #define LL 20
+#define EQ 100000
 
 // Definition of bool-variables
 typedef enum { false, true } bool;
@@ -51,5 +52,6 @@ extern long seed;
 extern double dt;
 extern double r_v;
 extern double L;
+
 
 #endif

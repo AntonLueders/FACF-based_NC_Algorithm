@@ -27,13 +27,18 @@ void PrintOvito(FILE *f, Particle *P, long step) {
 
 // ----------------------------------------------------------------------------------------
 
-void PrintFACF(FILE *filename, long n_max, long *lengthF, double *facf, double *nfcf, unsigned long long *counter_FACF) {
+void PrintFACF(FILE *filename, long n_max, long *lengthF, double *facf, double *nfcf, 
+		unsigned long long *counter_FACF) {
 
     for (long n = 0; n < n_max; n++) {
         unsigned long long counter_check = counter_FACF[n];
         if (counter_check == 0) {
             counter_check = 1;
         }
-        fprintf(filename, "%f\t%2.14f\t%2.14f\n", (double)lengthF[n] * dt, facf[n] / (double)counter_check, nfcf[n] / (double)counter_check / dt);
+        fprintf(filename, "%f\t%2.14f\t%2.14f\n", (double)lengthF[n] * dt, 
+			facf[n] / (double)counter_check, nfcf[n] / (double)counter_check / dt);
     }
 }
+
+// ----------------------------------------------------------------------------------------
+

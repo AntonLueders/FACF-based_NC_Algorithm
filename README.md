@@ -61,6 +61,24 @@ dt     0.0002
 r_v     2.5
 L       37.411000
 ```
+
+For the driven and the active partice simulations, the input file should be in line with the following example:
+
+```
+dim       3
+N       1000
+T       1.000000
+steps     2000000000
+rate     2000000
+sigma   1.000000
+seed     20
+dt     0.0002
+r_v     2.5
+L       37.411000
+force   5.0
+```
+Note that, for active particles, the dimension should be set to two.
+
 Here, The particular lines of such an input file are summarized in the following list:
 
 - *dim:* Dimension of the system
@@ -73,6 +91,7 @@ Here, The particular lines of such an input file are summarized in the following
 - *dt:* Length of a simulation step in units of the Brownian time
 - *r_v:* Radius for the Verlet lists
 - *L:* Box length of the simulation box
+- *force:* Magnitude of the force that drives the system out-of-equilibrium
 
  <a id="Data"></a>
 # How to interprete the generated data

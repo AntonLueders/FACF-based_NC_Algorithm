@@ -1,6 +1,8 @@
 #include "verletlist.h"
 #include "distance.h"
 
+// ----------------------------------------------------------------------------------------
+
 void GenerateVerletLists(Particle *P) {
 	
 	for (int i = 0; i < N; i++) {
@@ -12,7 +14,9 @@ void GenerateVerletLists(Particle *P) {
 			
 			double disij = Distance(&(P[i]), &(P[j]), rij);     // See distance.c
 		
-			if (disij < (r_v + pow(2., 1./6.) * (P[i].sigma + P[j].sigma) / 2. + pow(2., 1./6.) * P[j].sigma / 2.)) {
+			if (disij < (r_v + pow(2., 1./6.) * (P[i].sigma + P[j].sigma) / 2. 
+				+ pow(2., 1./6.) * P[j].sigma / 2.)) {
+				
 				push(P[i].verList, P[j].verList->value);
 				push(P[j].verList, P[i].verList->value);					
 			}
@@ -25,6 +29,10 @@ void GenerateVerletLists(Particle *P) {
 	}
 }
 
+// ----------------------------------------------------------------------------------------
+
+// If two particles are in total displaced by at least the Verlet radius, the Verlet 
+// lists must be updated
 bool CheckVerlet(Particle *P) {
 	
 	double dissq_max[2] = {0., 0.};
@@ -50,6 +58,8 @@ bool CheckVerlet(Particle *P) {
 	return (sqrt(dissq_max[0]) + sqrt(dissq_max[1])) >= r_v;
 }
 
+// ----------------------------------------------------------------------------------------
+
 void FreeVerLists(Particle *P) {
 
     for(int i = 0; i < N; i++) {
@@ -57,3 +67,4 @@ void FreeVerLists(Particle *P) {
         free(P[i].verList);
     }
 }
+

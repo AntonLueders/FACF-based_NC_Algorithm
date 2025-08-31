@@ -1,6 +1,11 @@
 #include "calc.h"
 
-void InitParametersCalcFACF(int *resolution, int *min_rate, double *a, double *e, int *n_min, long *n_max, long *t_samp, long steps) {
+// ----------------------------------------------------------------------------------------
+
+// The following functions are just for the initialization of the algorithm to calculate
+// the correlation function
+void InitParametersCalcFACF(int *resolution, int *min_rate, double *a, double *e, 
+		int *n_min, long *n_max, long *t_samp, long steps) {
 	
     *resolution = 15;
     *min_rate = 10;
@@ -12,7 +17,10 @@ void InitParametersCalcFACF(int *resolution, int *min_rate, double *a, double *e
     *t_samp = 0;
 }
 
-void InitiSampleArraysCalcFACF(long n_max, int n_min, double a, double e, long **lengthF, long **rateF, long ***sample) {
+// ----------------------------------------------------------------------------------------
+
+void InitiSampleArraysCalcFACF(long n_max, int n_min, double a, double e, long **lengthF, 
+		long **rateF, long ***sample) {
 	
     *lengthF = malloc(n_max * sizeof(long));
     *rateF = malloc(n_max * sizeof(long));
@@ -29,7 +37,11 @@ void InitiSampleArraysCalcFACF(long n_max, int n_min, double a, double e, long *
     }
 }
 
-void InitStorageArraysFACF(long n_max, long *rateF, int N, int dim, unsigned long long **counter_FACF, double **facf, double **nfcf, double *****f0, double *****n0) {
+// ----------------------------------------------------------------------------------------
+
+void InitStorageArraysFACF(long n_max, long *rateF, int N, int dim, 
+		unsigned long long **counter_FACF, double **facf, double **nfcf, double *****f0, 
+		double *****n0) {
 	
     *counter_FACF = malloc(n_max * sizeof(unsigned long long));
     *facf = malloc(n_max * sizeof(double));
@@ -97,7 +109,14 @@ void InitStorageArraysFACF(long n_max, long *rateF, int N, int dim, unsigned lon
     }
 }
 
-void CalcFACF(long n_max, long **sample, long *lengthF, long *rateF, double *facf, double *nfcf, double ****f0, double ****n0, unsigned long long *counter_FACF, Particle *P, long *t_samp) {
+// ----------------------------------------------------------------------------------------
+
+// Calculates the correlation function. 
+// For more infos see Siems et al. J. Phys. Conf. Ser. 2018 or
+// http://nbn-resolving.de/urn:nbn:de:bsz:352-0-419804
+void CalcFACF(long n_max, long **sample, long *lengthF, long *rateF, double *facf, 
+		double *nfcf, double ****f0, double ****n0, unsigned long long *counter_FACF, 
+		Particle *P, long *t_samp) {
 
     for (long n = 0; n < n_max; n++) {
         for (long nn = 0; nn < rateF[n]; nn++) {
@@ -106,7 +125,8 @@ void CalcFACF(long n_max, long **sample, long *lengthF, long *rateF, double *fac
                     for (int i = 0; i < N; i++) {
                         for (int d = 0; d < dim; d++) {
                             facf[n] += P[i].f[d] * f0[n][nn][i][d];
-		            nfcf[n] += (P[i].f[d] + P[i].Noise[d] / dt) * (n0[n][nn][i][d] + f0[n][nn][i][d]);
+		            		nfcf[n] += (P[i].f[d] + P[i].Noise[d] / dt) 
+								* (n0[n][nn][i][d] + f0[n][nn][i][d]);
                         }
                         counter_FACF[n]++;
                     }
@@ -121,7 +141,7 @@ void CalcFACF(long n_max, long **sample, long *lengthF, long *rateF, double *fac
                 for (int i = 0; i < N; i++) {
                     for (int d = 0; d < dim; d++) {
                         f0[n][nn][i][d] = P[i].f[d];
-			n0[n][nn][i][d] = P[i].Noise[d] / dt;
+						n0[n][nn][i][d] = P[i].Noise[d] / dt;
                     }
                 }
             }
@@ -131,8 +151,10 @@ void CalcFACF(long n_max, long **sample, long *lengthF, long *rateF, double *fac
     (*t_samp)++;
 }
 
+// ----------------------------------------------------------------------------------------
 
-void FreeMemoryFACF(long n_max, long **sample, long *lengthF, long *rateF, double *facf, double *nfcf, double ****f0, double ****n0) {
+void FreeMemoryFACF(long n_max, long **sample, long *lengthF, long *rateF, double *facf, 
+		double *nfcf, double ****f0, double ****n0) {
  
     for (long n = 0; n < n_max; n++) {
         free(sample[n]);
@@ -161,6 +183,4 @@ void FreeMemoryFACF(long n_max, long **sample, long *lengthF, long *rateF, doubl
 	free(rateF);
 }
 
-
-
-
+// ----------------------------------------------------------------------------------------

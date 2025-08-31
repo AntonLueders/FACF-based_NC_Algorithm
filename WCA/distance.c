@@ -32,4 +32,7 @@ double Distance(Particle *p_i, Particle *p_j, double *rij) {
 	}	
 	
 	return sqrt(dissq);
+
 }
+
+// ----------------------------------------------------------------------------------------

@@ -118,7 +118,8 @@ int main(int argc, char *argv[]) {
 		}
 		
 		if(step > EQ) { // Equilibration time
-			CalcFACF(n_max, sample, lengthF, rateF, facf, nfcf, f0, n0, counter_FACF, P, &t_samp); // See calc.c
+			CalcFACF(n_max, sample, lengthF, rateF, facf, nfcf, f0, n0, counter_FACF,
+				P, &t_samp); // See calc.c
 		}
 				
 		if ((step + 1) % (long)rate == 0) {
@@ -150,4 +151,5 @@ int main(int argc, char *argv[]) {
     // End of simulation
     return 0;
 }
+
 

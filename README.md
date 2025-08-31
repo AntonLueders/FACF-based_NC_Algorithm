@@ -4,7 +4,7 @@ The noise-cancellation (NC) algorithm recently introduced by Mandal et al. [Mand
 
 [1] *Connection between the noise-cancellation algorithm for Brownian particles and the force autocorrelation function and its applicability to arbitrary overdamped systems* by Anton Lüders, Suvendu Mandal, and Thomas Franosch,
 
-This strategy is equivalent to approximating the VACF with the force autocorrelation function (FACF) in thermal equilibrium. For nonequilibrium systems, the NC algorithm must be adjusted, as the VACF cannot be represented by the FACF alone. 
+this strategy is equivalent to approximating the VACF with the force autocorrelation function (FACF) in thermal equilibrium. For nonequilibrium systems, the NC algorithm must be adjusted, as the VACF cannot be represented by the FACF alone. 
 
 This repository contains the software that is used to perform the simulations presented in [1].
 

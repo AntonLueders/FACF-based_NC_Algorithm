@@ -79,7 +79,7 @@ force   5.0
 ```
 Note that, for active particles, the dimension should be set to two.
 
-Here, The particular lines of such an input file are summarized in the following list:
+The particular lines of such an input file are summarized in the following list:
 
 - *dim:* Dimension of the system
 - *N:* Number of particles

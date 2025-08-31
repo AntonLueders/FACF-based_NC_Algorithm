@@ -1,12 +1,18 @@
 #include "force.h"
 #include "distance.h"
 
+// ----------------------------------------------------------------------------------------
+
+// The soft spheres are modeled with the Weeks-Chandler-Andersen potential
 double CalcWCA(double sigmasq, double dijsq, double eps) {
 
     double inv_rsq_eff = sigmasq / dijsq;
     return 48. * eps / sigmasq * (pow(inv_rsq_eff, 7.) - 0.5 * pow(inv_rsq_eff, 4.));
 }
 
+// ----------------------------------------------------------------------------------------
+
+// Evaluates pair interaction forces
 void CalcForce(Particle *P) {
 	
 	for(int i = 0; i < N; i++) {
@@ -28,7 +34,8 @@ void CalcForce(Particle *P) {
 				double dis = Distance(&(P[i]), &(P[j]), rij);
 				if(dis < pow(2., 1. / 6.) * (P[i].sigma + P[j].sigma) / 2.) {
 				
-					double fp = CalcWCA(pow((P[i].sigma + P[j].sigma) / 2., 2.), dis * dis, 1.0);
+					double fp = CalcWCA(pow((P[i].sigma + P[j].sigma) / 2., 2.), 
+							dis * dis, 1.0);
 					
 					for(int d = 0; d < dim; d++) {
 						
@@ -42,4 +49,7 @@ void CalcForce(Particle *P) {
 			current = current->next;
 		} 
 	}
+
 }
+
+// ----------------------------------------------------------------------------------------

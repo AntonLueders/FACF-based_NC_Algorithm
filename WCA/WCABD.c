@@ -14,17 +14,21 @@
 // ----------------------------------------------------------------------------------------    
 
 gsl_rng *generator = NULL;                                  // Random number generator
-int dim = DIM;
-int N = NP;
-double D = DDD;
-double T = TEMP;
-long steps = STEPS;
-int rate = RATE;
-double sigma = SIGMA;
-long seed = SEED;
-double dt = DT;
-double r_v = RV;
-double L = LL;
+int dim = DIM;												// Dimension of the setup
+int N = NP;													// Particle number
+double D = DDD;												// Diffusion coefficient
+double T = TEMP;											// Thermal energy
+long steps = STEPS;											// Number of steps
+int rate = RATE;											// Output rate
+double sigma = SIGMA;										// Diameter
+long seed = SEED;											// Seed for random numbers
+double dt = DT;												// Time step
+double r_v = RV;											// Verlet radius
+double L = LL;												// Box length
+
+// ----------------------------------------------------------------------------------------
+// Main
+// ---------------------------------------------------------------------------------------- 
 
 int main(int argc, char *argv[]) {
 	
@@ -35,7 +39,7 @@ int main(int argc, char *argv[]) {
 	PrintWelcome();
 	
 	// The program only runs with "inputfile" in the same folder. 
-    // A new inputfile can be generated with "./NpT_SC.exe Setup"
+    // A new inputfile can be generated with "./WCABD.exe Setup"
     if (argc == 2 && !strcmp(argv[1], "Setup")) {
 
         // Generates an example input file which can be customized. 
@@ -51,6 +55,7 @@ int main(int argc, char *argv[]) {
         return 0;
     }
 	
+	// Obtains parameters from the input file. See inputdata.c
 	ReadInput();
 	PrintInput();
 	CheckForConflict();	
@@ -62,7 +67,8 @@ int main(int argc, char *argv[]) {
     generator = gsl_rng_alloc(gsl_rng_mt19937);
     printf("Random number generator: mt19937\n");
     gsl_rng_set(generator, seed);
-	
+
+	// Initialization. See init.c
 	InitRandom(P);
 	
 	FILE *position_file_ovito = NULL;
@@ -70,6 +76,12 @@ int main(int argc, char *argv[]) {
 	
 	GenerateVerletLists(P);
 	long counter_verlet = 1;
+	
+	
+	// ---------------------------------------------------------------------------------------- 
+	// Here, everything is initilized for the calculation of the correlation functions
+	// See Siems et al. J. Phys. Conf. Ser. 2018 for the applied algorithm
+	// See calc.c for the functions
 	
 	int resolution, min_rate, n_min;
 	long n_max, t_samp;
@@ -88,25 +100,32 @@ int main(int argc, char *argv[]) {
 	double ****n0;
     InitStorageArraysFACF(n_max, rateF, N, dim, &counter_FACF, &facf, &nfcf, &f0, &n0);	
 	
+	// ----------------------------------------------------------------------------------------
+
+	
+	// ----------------------------------------------------------------------------------------
+	// Main simulation loop
+	
 	for (long step = 0; step < steps; step++) {
 		
-		BrownianMotion(P);
+		BrownianMotion(P); // Position update with stochastic Euler. See bd.c
 		
-		CalcForce(P);			
+		CalcForce(P); // Pair forces. See force.c
 		
 		if(CheckVerlet(P)) {
 			GenerateVerletLists(P);
 			counter_verlet++;
 		}
 		
-		if(step > EQ) {
-			CalcFACF(n_max, sample, lengthF, rateF, facf, nfcf, f0, n0, counter_FACF, P, &t_samp);
+		if(step > EQ) {  // Equilibration time
+			CalcFACF(n_max, sample, lengthF, rateF, facf, nfcf, f0, n0, counter_FACF, P, &t_samp); // See calc.c
 		}
 				
 		if ((step + 1) % (long)rate == 0) {
-			PrintOvito(position_file_ovito, P, step);
+			PrintOvito(position_file_ovito, P, step); // See printdata.c
 		}
 	}
+	// ----------------------------------------------------------------------------------------
 	
 	FILE *facf_file = NULL;
     facf_file = fopen("facf.dat", "w");
@@ -130,4 +149,5 @@ int main(int argc, char *argv[]) {
 	
     // End of simulation
     return 0;
+
 }

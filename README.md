@@ -2,7 +2,7 @@
 
 The noise-cancellation (NC) algorithm recently introduced by Mandal et al. [Mandal et al. PRL 2019] is an effective method to obtain high-accuracy velocity-correlation data from Brownian dynamics (BD) simulations, especially in the long-time regime. Its core concept is to decompose particle displacements into the contributions of the Brownian motion and the deterministic forces. Then, terms arising from the cross-correlation of these two contributions are neglected while evaluating the velocity autocorrelation function (VACF). As discussed in  
 
-[1] *Connection between the noise-cancellation algorithm for Brownian particles and the force autocorrelation function and its applicability to arbitrary overdamped systems* by Anton Lüders, Suvendu Mandal, and Thomas Franosch,
+[1] *When velocity autocorrelations mirror force autocorrelations: Exact noise-cancellation in interacting Brownian systems* by Anton Lüders, Suvendu Mandal, and Thomas Franosch,
 
 this strategy is equivalent to approximating the VACF with the force autocorrelation function (FACF) in thermal equilibrium. For nonequilibrium systems, the NC algorithm must be adjusted, as the VACF cannot be represented by the FACF alone. 
 
@@ -113,4 +113,4 @@ Note that the presented code is *not* an ongoing software project with active su
 
 If you use this simulation software or parts of it, please cite
 
-[1] *Connection between the noise-cancellation algorithm for Brownian particles and the force autocorrelation function and its applicability to arbitrary overdamped systems* by Anton Lüders, Suvendu Mandal, and Thomas Franosch.
+[1] *When velocity autocorrelations mirror force autocorrelations: Exact noise-cancellation in interacting Brownian systems* by Anton Lüders, Suvendu Mandal, and Thomas Franosch.

@@ -22,7 +22,7 @@ All information and methods employed in the code of this repository are describe
  <a id="Contents"></a>
 # Contents of the particular folders
 
-The repository contains multiple folders, each containing the software for one of the example systems studied in [1]. The folder *WCA* contains the code for the soft-sphere simulations. The folder *HS* contains all files necessary for the hard-sphere simulations based on the "potential-free" BD algorithm of Meyes and Melrose [Heyes et al. J. Non-Newton. Fluid Mech. 1993]. In *Driven*, an adjusted version of the hard-sphere program can be found, where the particles are driven in the positive x-direction. Finally, *ABP* contains the code for the simulations corresponding to an active Brownian particle (ABP) in a harmonic potential.
+The repository contains multiple folders, each containing the software for one of the example systems studied in [1]. The folder *WCA* contains the code for the soft-sphere simulations. The folder *HS* contains all files necessary for the hard-sphere simulations based on the "potential-free" BD algorithm of Heyes and Melrose [Heyes et al. J. Non-Newton. Fluid Mech. 1993]. In *Driven*, an adjusted version of the hard-sphere program can be found, where the particles are driven in the positive x-direction. Finally, *ABP* contains the code for the simulations corresponding to an active Brownian particle (ABP) in a harmonic potential.
  
  <a id="Requirements"></a>
 # Requirements

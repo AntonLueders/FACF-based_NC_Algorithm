@@ -1,3 +1,8 @@
+// ----------------------------------------------------------------------------------------
+// This ABP code is based on the many-body simulation code. Therefore, some of the 
+// functions focusing on pair interactions are not used.
+// ----------------------------------------------------------------------------------------  
+
 #include "ABPBD.h"
 #include "init.h"
 #include "bd.h"
@@ -146,4 +151,5 @@ int main(int argc, char *argv[]) {
     // End of simulation
     return 0;
 	
+
 }

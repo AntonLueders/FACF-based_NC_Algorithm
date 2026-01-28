@@ -115,12 +115,12 @@ int main(int argc, char *argv[]) {
 		
 		BrownianMotion(P); // Position update with stochastic Euler. See bd.c
 		
-		CalcForce(P); // Active forces and harmnoic trap. See force.c
-		
 		if(step > EQ) { // Equilibration time
 			CalcFACF(n_max, sample, lengthF, rateF, facf, nfcf, f0, n0, 
 				counter_FACF, P, &t_samp); // See calc.c
 		}
+
+		CalcForce(P); // Active forces and harmnoic trap. See force.c
 				
 		if ((step + 1) % (long)rate == 0) {
 			PrintOvito(position_file_ovito, P, step);
@@ -153,3 +153,4 @@ int main(int argc, char *argv[]) {
 	
 
 }
+

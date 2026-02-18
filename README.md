@@ -10,6 +10,8 @@ This repository contains the software that is used to perform the simulations pr
 
 All information and methods employed in the code of this repository are described in detail in the main text and appendix of [1]. While the given code can be used to repeat the corresponding simulations, we strongly encourage a full independent reproduction using the information in said corresponding manuscript.  
 
+[![DOI](https://zenodo.org/badge/1047586142.svg)](https://doi.org/10.5281/zenodo.18681192)
+
 # Table of content:
  - [Contents of the particular folders](#Contents)
  - [Requirements](#Requirements)
